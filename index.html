@@ -725,11 +725,12 @@ async function boot(){
     w.textContent="⚙️ Add your Supabase URL + anon key near the top of this file, then reload.";
     $("#sendLink").disabled=true; return;
   }
-  sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON,{auth:{detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});
+  sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON,{auth:{flowType:"implicit",detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});
+  let started=false;
+  async function start(s){ if(started||!s) return; started=true; session=s; await onSignedIn(); }
+  sb.auth.onAuthStateChange((_e,s)=>{ start(s); });
   const {data}=await sb.auth.getSession();
-  session=data.session;
-  if(session){ await onSignedIn(); }
-  sb.auth.onAuthStateChange((_e,s)=>{ if(s&&!session){ session=s; onSignedIn(); } });
+  start(data.session);
 
   if("serviceWorker" in navigator){
     try{ await navigator.serviceWorker.register("sw.js"); }catch(e){ /* offline cache optional */ }
