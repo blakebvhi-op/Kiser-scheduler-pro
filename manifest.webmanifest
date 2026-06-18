@@ -1,0 +1,16 @@
+{
+  "name": "Kiser Schedule Pro",
+  "short_name": "Kiser Schedule",
+  "description": "The Kiser family's groovy shared calendar.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF1DE",
+  "theme_color": "#E2703A",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
